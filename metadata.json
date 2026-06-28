@@ -1,0 +1,6 @@
+{
+  "name": "Classic IT Calculator",
+  "description": "A modern, elegant scientific calculator with dynamic themes, formula graphing, history tracking, and unit converters.",
+  "requestFramePermissions": [],
+  "majorCapabilities": ["MAJOR_CAPABILITY_SERVER_SIDE_GEMINI_API"]
+}
