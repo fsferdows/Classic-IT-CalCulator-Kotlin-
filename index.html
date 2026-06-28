@@ -252,77 +252,186 @@
           
           <!-- Column 1: The Calculator Unit (7 Columns wide on desktop) -->
           <div class="lg:col-span-5 mx-auto w-full max-w-[380px] bg-brand-navy rounded-3xl border border-brand-gold/40 shadow-2xl overflow-hidden relative">
-            <!-- Screen Area -->
-            <div class="p-6 bg-[#030614] border-b border-brand-gold/20 flex flex-col gap-1 items-end relative min-h-[110px]">
-              <!-- Active Mode Indicator -->
-              <div class="absolute left-6 top-3 text-[9px] text-brand-gold font-bold tracking-widest flex items-center gap-1.5 uppercase">
-                <span class="inline-block w-1.5 h-1.5 rounded-full bg-brand-gold animate-pulse"></span>
-                <span>CITC v1.2.0 • HIGH ACCURACY</span>
-              </div>
-
-              <!-- Input Screen -->
-              <div id="calc-input" class="w-full text-right text-gray-400 font-mono text-base overflow-x-auto whitespace-nowrap scrollbar-none mt-4 select-all"></div>
-              
-              <!-- Output Result Screen -->
-              <div id="calc-result" class="w-full text-right text-brand-gold font-mono text-3xl font-bold select-all overflow-x-auto whitespace-nowrap">0</div>
-            </div>
-
-            <!-- Memory and Shift Row -->
-            <div class="px-6 py-3 bg-brand-navy/60 border-b border-brand-gold/10 flex justify-between items-center text-xs text-brand-goldLight font-semibold">
-              <span id="calc-mem-indicator" class="opacity-0 font-mono bg-brand-gold/20 text-brand-gold px-1.5 py-0.5 rounded text-[10px]">M</span>
-              <div class="flex gap-4">
-                <button onclick="calcMemoryClear()" class="hover:text-white transition">MC</button>
-                <button onclick="calcMemoryRecall()" class="hover:text-white transition">MR</button>
-                <button onclick="calcMemoryAdd()" class="hover:text-white transition">M+</button>
-                <button onclick="calcMemorySubtract()" class="hover:text-white transition">M-</button>
-              </div>
-            </div>
-
-            <!-- Keypad Grid -->
-            <div class="p-4 grid grid-cols-4 gap-2.5 bg-brand-navy">
-              <!-- Row 1 Scientifics -->
-              <button onclick="calcInput('(')" class="py-3 bg-brand-navy/80 hover:bg-brand-royal/40 border border-brand-gold/10 text-gray-300 font-medium rounded-xl transition text-sm font-mono">(</button>
-              <button onclick="calcInput(')')" class="py-3 bg-brand-navy/80 hover:bg-brand-royal/40 border border-brand-gold/10 text-gray-300 font-medium rounded-xl transition text-sm font-mono">)</button>
-              <button onclick="calcInput('^')" class="py-3 bg-brand-navy/80 hover:bg-brand-royal/40 border border-brand-gold/10 text-brand-gold font-medium rounded-xl transition text-sm font-mono">^</button>
-              <button onclick="calcClear()" class="py-3 bg-red-950/40 hover:bg-red-900/40 border border-red-500/30 text-red-400 font-bold rounded-xl transition text-sm font-mono">AC</button>
-
-              <!-- Row 2 Scientifics -->
-              <button onclick="calcFunction('sin')" class="py-3 bg-[#111E52] hover:bg-brand-royal/40 border border-brand-gold/10 text-brand-goldLight font-medium rounded-xl transition text-xs font-mono">sin</button>
-              <button onclick="calcFunction('cos')" class="py-3 bg-[#111E52] hover:bg-brand-royal/40 border border-brand-gold/10 text-brand-goldLight font-medium rounded-xl transition text-xs font-mono">cos</button>
-              <button onclick="calcFunction('tan')" class="py-3 bg-[#111E52] hover:bg-brand-royal/40 border border-brand-gold/10 text-brand-goldLight font-medium rounded-xl transition text-xs font-mono">tan</button>
-              <button onclick="calcBackspace()" class="py-3 bg-brand-navy/80 hover:bg-brand-royal/40 border border-brand-gold/10 text-gray-300 font-medium rounded-xl transition text-sm flex items-center justify-center">
-                <i data-lucide="delete" class="w-4 h-4"></i>
-              </button>
-
-              <!-- Row 3 Numbers / Standard Ops -->
-              <button onclick="calcInput('7')" class="py-3.5 bg-brand-navy hover:bg-brand-royal/20 border border-brand-gold/10 text-white font-bold rounded-xl transition text-base">7</button>
-              <button onclick="calcInput('8')" class="py-3.5 bg-brand-navy hover:bg-brand-royal/20 border border-brand-gold/10 text-white font-bold rounded-xl transition text-base">8</button>
-              <button onclick="calcInput('9')" class="py-3.5 bg-brand-navy hover:bg-brand-royal/20 border border-brand-gold/10 text-white font-bold rounded-xl transition text-base">9</button>
-              <button onclick="calcInput('/')" class="py-3.5 bg-[#1E3A8A] hover:bg-blue-800 border border-brand-gold/10 text-brand-goldLight font-bold rounded-xl transition text-lg font-mono">÷</button>
-
-              <!-- Row 4 Numbers / Standard Ops -->
-              <button onclick="calcInput('4')" class="py-3.5 bg-brand-navy hover:bg-brand-royal/20 border border-brand-gold/10 text-white font-bold rounded-xl transition text-base">4</button>
-              <button onclick="calcInput('5')" class="py-3.5 bg-brand-navy hover:bg-brand-royal/20 border border-brand-gold/10 text-white font-bold rounded-xl transition text-base">5</button>
-              <button onclick="calcInput('6')" class="py-3.5 bg-brand-navy hover:bg-brand-royal/20 border border-brand-gold/10 text-white font-bold rounded-xl transition text-base">6</button>
-              <button onclick="calcInput('*')" class="py-3.5 bg-[#1E3A8A] hover:bg-blue-800 border border-brand-gold/10 text-brand-goldLight font-bold rounded-xl transition text-lg font-mono">×</button>
-
-              <!-- Row 5 Numbers / Standard Ops -->
-              <button onclick="calcInput('1')" class="py-3.5 bg-brand-navy hover:bg-brand-royal/20 border border-brand-gold/10 text-white font-bold rounded-xl transition text-base">1</button>
-              <button onclick="calcInput('2')" class="py-3.5 bg-brand-navy hover:bg-brand-royal/20 border border-brand-gold/10 text-white font-bold rounded-xl transition text-base">2</button>
-              <button onclick="calcInput('3')" class="py-3.5 bg-brand-navy hover:bg-brand-royal/20 border border-brand-gold/10 text-white font-bold rounded-xl transition text-base">3</button>
-              <button onclick="calcInput('-')" class="py-3.5 bg-[#1E3A8A] hover:bg-blue-800 border border-brand-gold/10 text-brand-goldLight font-bold rounded-xl transition text-lg font-mono">−</button>
-
-              <!-- Row 6 Numbers / Standard Ops -->
-              <button onclick="calcInput('0')" class="py-3.5 bg-brand-navy hover:bg-brand-royal/20 border border-brand-gold/10 text-white font-bold rounded-xl transition text-base">0</button>
-              <button onclick="calcInput('.')" class="py-3.5 bg-brand-navy hover:bg-brand-royal/20 border border-brand-gold/10 text-white font-bold rounded-xl transition text-base font-mono">.</button>
-              <button onclick="calcInput('%')" class="py-3.5 bg-brand-navy hover:bg-brand-royal/20 border border-brand-gold/10 text-white font-bold rounded-xl transition text-base font-mono">%</button>
-              <button onclick="calcInput('+')" class="py-3.5 bg-[#1E3A8A] hover:bg-blue-800 border border-brand-gold/10 text-brand-goldLight font-bold rounded-xl transition text-lg font-mono">+</button>
-            </div>
             
-            <!-- Equals Row -->
-            <div class="p-4 bg-brand-navy/40 border-t border-brand-gold/15">
-              <button onclick="calcEvaluate()" class="w-full py-4 bg-gradient-to-r from-brand-gold to-brand-goldLight hover:opacity-90 font-black text-brand-navy rounded-xl transition shadow-lg text-lg tracking-wider font-mono">=</button>
+            <!-- Interactive Sub-Tabs (mirrors Android Hub screen selectors) -->
+            <div class="px-3 pt-3 pb-2 bg-brand-navy border-b border-brand-gold/15 flex gap-1.5 justify-around">
+              <button id="web-tab-calc" onclick="switchWebTab('calc')" class="flex-1 py-1.5 rounded-lg text-[10px] font-bold uppercase tracking-wider transition bg-brand-gold text-brand-navy">
+                🧮 Calculator
+              </button>
+              <button id="web-tab-conv" onclick="switchWebTab('conv')" class="flex-1 py-1.5 rounded-lg text-[10px] font-bold uppercase tracking-wider transition bg-brand-navy/60 border border-brand-gold/10 text-gray-300">
+                🔄 Converter
+              </button>
+              <button id="web-tab-graph" onclick="switchWebTab('graph')" class="flex-1 py-1.5 rounded-lg text-[10px] font-bold uppercase tracking-wider transition bg-brand-navy/60 border border-brand-gold/10 text-gray-300">
+                📈 Graphing
+              </button>
             </div>
+
+            <!-- PANE 1: CALCULATOR -->
+            <div id="web-pane-calc" class="flex flex-col">
+              <!-- Screen Area -->
+              <div class="p-5 bg-[#030614] border-b border-brand-gold/20 flex flex-col gap-1 items-end relative min-h-[110px]">
+                <!-- Active Mode Indicator -->
+                <div class="absolute left-5 top-2.5 text-[9px] text-brand-gold font-bold tracking-widest flex items-center gap-1.5 uppercase">
+                  <span class="inline-block w-1.5 h-1.5 rounded-full bg-brand-gold animate-pulse"></span>
+                  <span>CITC v1.2.0 • HIGH ACCURACY</span>
+                </div>
+
+                <!-- Input Screen -->
+                <div id="calc-input" class="w-full text-right text-gray-400 font-mono text-base overflow-x-auto whitespace-nowrap scrollbar-none mt-4 select-all"> </div>
+                
+                <!-- Output Result Screen -->
+                <div id="calc-result" class="w-full text-right text-brand-gold font-mono text-3xl font-bold select-all overflow-x-auto whitespace-nowrap">0</div>
+              </div>
+
+              <!-- Extra Utility Row: DEG/RAD Switch, Copy, Scientific toggle -->
+              <div class="px-4 py-2 bg-brand-navy/80 border-b border-brand-gold/10 flex justify-between items-center text-xs text-brand-goldLight font-semibold">
+                <button onclick="toggleWebDegRad()" id="calc-degrad-btn" class="bg-brand-navy/60 border border-brand-gold/20 hover:border-brand-gold text-[10px] px-2.5 py-1 rounded transition">DEG</button>
+                <div class="flex items-center gap-2">
+                  <button onclick="copyCalcResult()" class="bg-brand-navy/60 border border-brand-gold/20 hover:border-brand-gold text-[10px] px-2 py-1 rounded transition flex items-center justify-center gap-1">
+                    <i data-lucide="copy" class="w-3.5 h-3.5"></i> Copy
+                  </button>
+                  <button onclick="toggleWebScientific()" id="calc-scitoggle-btn" class="bg-brand-navy/60 border border-brand-gold/20 hover:border-brand-gold text-[10px] px-2 py-1 rounded transition text-brand-gold">Scientific: Off</button>
+                </div>
+              </div>
+
+              <!-- Scientific Section (collapsible) -->
+              <div id="calc-scientific-panel" class="hidden px-4 pt-3 pb-1 bg-brand-navy grid grid-cols-5 gap-1.5 border-b border-brand-gold/10">
+                <button onclick="calcFunction('sin')" class="py-2 bg-[#111E52] hover:bg-brand-royal/40 border border-brand-gold/10 text-brand-goldLight rounded-lg text-[10px] font-mono">sin</button>
+                <button onclick="calcFunction('cos')" class="py-2 bg-[#111E52] hover:bg-brand-royal/40 border border-brand-gold/10 text-brand-goldLight rounded-lg text-[10px] font-mono">cos</button>
+                <button onclick="calcFunction('tan')" class="py-2 bg-[#111E52] hover:bg-brand-royal/40 border border-brand-gold/10 text-brand-goldLight rounded-lg text-[10px] font-mono">tan</button>
+                <button onclick="calcFunction('ln')" class="py-2 bg-[#111E52] hover:bg-brand-royal/40 border border-brand-gold/10 text-brand-goldLight rounded-lg text-[10px] font-mono">ln</button>
+                <button onclick="calcFunction('log')" class="py-2 bg-[#111E52] hover:bg-brand-royal/40 border border-brand-gold/10 text-brand-goldLight rounded-lg text-[10px] font-mono">log</button>
+
+                <button onclick="calcFunction('asin')" class="py-2 bg-[#111E52] hover:bg-brand-royal/40 border border-brand-gold/10 text-brand-goldLight rounded-lg text-[10px] font-mono">asin</button>
+                <button onclick="calcFunction('acos')" class="py-2 bg-[#111E52] hover:bg-brand-royal/40 border border-brand-gold/10 text-brand-goldLight rounded-lg text-[10px] font-mono">acos</button>
+                <button onclick="calcFunction('atan')" class="py-2 bg-[#111E52] hover:bg-brand-royal/40 border border-brand-gold/10 text-brand-goldLight rounded-lg text-[10px] font-mono">atan</button>
+                <button onclick="calcInput('√(')" class="py-2 bg-[#111E52] hover:bg-brand-royal/40 border border-brand-gold/10 text-brand-goldLight rounded-lg text-[10px] font-mono">√</button>
+                <button onclick="calcInput('∛(')" class="py-2 bg-[#111E52] hover:bg-brand-royal/40 border border-brand-gold/10 text-brand-goldLight rounded-lg text-[10px] font-mono">∛</button>
+
+                <button onclick="calcInput('^2')" class="py-2 bg-[#111E52] hover:bg-brand-royal/40 border border-brand-gold/10 text-brand-goldLight rounded-lg text-[10px] font-mono">x²</button>
+                <button onclick="calcInput('^3')" class="py-2 bg-[#111E52] hover:bg-brand-royal/40 border border-brand-gold/10 text-brand-goldLight rounded-lg text-[10px] font-mono">x³</button>
+                <button onclick="calcInput('^')" class="py-2 bg-[#111E52] hover:bg-brand-royal/40 border border-brand-gold/10 text-brand-goldLight rounded-lg text-[10px] font-mono">x^y</button>
+                <button onclick="calcInput('π')" class="py-2 bg-[#111E52] hover:bg-brand-royal/40 border border-brand-gold/10 text-brand-goldLight rounded-lg text-[10px] font-mono">π</button>
+                <button onclick="calcInput('e')" class="py-2 bg-[#111E52] hover:bg-brand-royal/40 border border-brand-gold/10 text-brand-goldLight rounded-lg text-[10px] font-mono">e</button>
+
+                <button onclick="calcFunction('abs')" class="py-2 bg-[#111E52] hover:bg-brand-royal/40 border border-brand-gold/10 text-brand-goldLight rounded-lg text-[10px] font-mono">abs</button>
+                <button onclick="calcInput('10^')" class="py-2 bg-[#111E52] hover:bg-brand-royal/40 border border-brand-gold/10 text-brand-goldLight rounded-lg text-[10px] font-mono">10^x</button>
+                <button onclick="calcInput('e^')" class="py-2 bg-[#111E52] hover:bg-brand-royal/40 border border-brand-gold/10 text-brand-goldLight rounded-lg text-[10px] font-mono">e^x</button>
+                <button onclick="calcInput('!')" class="py-2 bg-[#111E52] hover:bg-brand-royal/40 border border-brand-gold/10 text-brand-goldLight rounded-lg text-[10px] font-mono">!</button>
+                <button onclick="calcInput('mod')" class="py-2 bg-[#111E52] hover:bg-brand-royal/40 border border-brand-gold/10 text-brand-goldLight rounded-lg text-[10px] font-mono">mod</button>
+              </div>
+
+              <!-- Keypad Grid (5-column layout to exactly match Android PortraitKeyboard!) -->
+              <div class="p-4 grid grid-cols-5 gap-2 bg-brand-navy">
+                <!-- Row 1: MC, MR, M+, M-, AC -->
+                <button onclick="calcMemoryClear()" class="py-2.5 bg-brand-navy/60 hover:bg-brand-royal/30 border border-brand-gold/10 text-brand-gold font-semibold rounded-lg transition text-xs font-mono">MC</button>
+                <button onclick="calcMemoryRecall()" class="py-2.5 bg-brand-navy/60 hover:bg-brand-royal/30 border border-brand-gold/10 text-brand-gold font-semibold rounded-lg transition text-xs font-mono">MR</button>
+                <button onclick="calcMemoryAdd()" class="py-2.5 bg-brand-navy/60 hover:bg-brand-royal/30 border border-brand-gold/10 text-brand-gold font-semibold rounded-lg transition text-xs font-mono">M+</button>
+                <button onclick="calcMemorySubtract()" class="py-2.5 bg-brand-navy/60 hover:bg-brand-royal/30 border border-brand-gold/10 text-brand-gold font-semibold rounded-lg transition text-xs font-mono">M-</button>
+                <button onclick="calcClear()" class="py-2.5 bg-red-950/40 hover:bg-red-900/40 border border-red-500/30 text-red-400 font-bold rounded-lg transition text-xs font-mono">AC</button>
+
+                <!-- Row 2: 7, 8, 9, DEL, ÷ -->
+                <button onclick="calcInput('7')" class="py-3 bg-brand-navy/80 hover:bg-brand-royal/20 border border-brand-gold/10 text-white font-bold rounded-lg transition text-sm">7</button>
+                <button onclick="calcInput('8')" class="py-3 bg-brand-navy/80 hover:bg-brand-royal/20 border border-brand-gold/10 text-white font-bold rounded-lg transition text-sm">8</button>
+                <button onclick="calcInput('9')" class="py-3 bg-brand-navy/80 hover:bg-brand-royal/20 border border-brand-gold/10 text-white font-bold rounded-lg transition text-sm">9</button>
+                <button onclick="calcBackspace()" class="py-3 bg-brand-navy/80 hover:bg-brand-royal/20 border border-brand-gold/10 text-brand-goldLight font-bold rounded-lg transition text-sm flex items-center justify-center">
+                  <i data-lucide="delete" class="w-4 h-4"></i>
+                </button>
+                <button onclick="calcInput('÷')" class="py-3 bg-[#1E3A8A]/60 hover:bg-brand-royal border border-brand-gold/10 text-brand-gold font-bold rounded-lg transition text-sm font-mono">÷</button>
+
+                <!-- Row 3: 4, 5, 6, %, × -->
+                <button onclick="calcInput('4')" class="py-3 bg-brand-navy/80 hover:bg-brand-royal/20 border border-brand-gold/10 text-white font-bold rounded-lg transition text-sm">4</button>
+                <button onclick="calcInput('5')" class="py-3 bg-brand-navy/80 hover:bg-brand-royal/20 border border-brand-gold/10 text-white font-bold rounded-lg transition text-sm">5</button>
+                <button onclick="calcInput('6')" class="py-3 bg-brand-navy/80 hover:bg-brand-royal/20 border border-brand-gold/10 text-white font-bold rounded-lg transition text-sm">6</button>
+                <button onclick="calcInput('%')" class="py-3 bg-brand-navy/80 hover:bg-brand-royal/20 border border-brand-gold/10 text-white font-bold rounded-lg transition text-sm font-mono">%</button>
+                <button onclick="calcInput('×')" class="py-3 bg-[#1E3A8A]/60 hover:bg-brand-royal border border-brand-gold/10 text-brand-gold font-bold rounded-lg transition text-sm font-mono">×</button>
+
+                <!-- Row 4: 1, 2, 3, mod, - -->
+                <button onclick="calcInput('1')" class="py-3 bg-brand-navy/80 hover:bg-brand-royal/20 border border-brand-gold/10 text-white font-bold rounded-lg transition text-sm">1</button>
+                <button onclick="calcInput('2')" class="py-3 bg-brand-navy/80 hover:bg-brand-royal/20 border border-brand-gold/10 text-white font-bold rounded-lg transition text-sm">2</button>
+                <button onclick="calcInput('3')" class="py-3 bg-brand-navy/80 hover:bg-brand-royal/20 border border-brand-gold/10 text-white font-bold rounded-lg transition text-sm">3</button>
+                <button onclick="calcInput('mod')" class="py-3 bg-[#1E3A8A]/40 hover:bg-brand-royal/20 border border-brand-gold/10 text-brand-goldLight font-bold rounded-lg transition text-xs font-mono">mod</button>
+                <button onclick="calcInput('-')" class="py-3 bg-[#1E3A8A]/60 hover:bg-brand-royal border border-brand-gold/10 text-brand-gold font-bold rounded-lg transition text-sm font-mono">−</button>
+
+                <!-- Row 5: 0, ., !, =, + -->
+                <button onclick="calcInput('0')" class="py-3 bg-brand-navy/80 hover:bg-brand-royal/20 border border-brand-gold/10 text-white font-bold rounded-lg transition text-sm">0</button>
+                <button onclick="calcInput('.')" class="py-3 bg-brand-navy/80 hover:bg-brand-royal/20 border border-brand-gold/10 text-white font-bold rounded-lg transition text-sm font-mono">.</button>
+                <button onclick="calcInput('!')" class="py-3 bg-[#1E3A8A]/40 hover:bg-brand-royal/20 border border-brand-gold/10 text-brand-goldLight font-bold rounded-lg transition text-sm font-mono">!</button>
+                <button onclick="calcEvaluate()" class="py-3 bg-gradient-to-r from-brand-gold to-brand-goldLight text-brand-navy font-black rounded-lg transition text-sm font-mono shadow-md">=</button>
+                <button onclick="calcInput('+')" class="py-3 bg-[#1E3A8A]/60 hover:bg-brand-royal border border-brand-gold/10 text-brand-gold font-bold rounded-lg transition text-sm font-mono">+</button>
+              </div>
+            </div>
+
+            <!-- PANE 2: CONVERTER -->
+            <div id="web-pane-conv" class="hidden p-5 flex flex-col gap-4 bg-brand-navy min-h-[350px]">
+              <!-- Type Selector -->
+              <div class="flex flex-col gap-1.5">
+                <label class="text-[10px] text-gray-400 font-bold uppercase tracking-wider">Converter Mode</label>
+                <select id="conv-type" onchange="updateConvType()" class="bg-[#030614] border border-brand-gold/20 rounded-xl px-3 py-2.5 text-sm text-white focus:outline-none focus:border-brand-gold font-semibold">
+                  <option value="Length">📏 Length</option>
+                  <option value="Weight">⚖️ Weight</option>
+                  <option value="Temperature">🌡️ Temperature</option>
+                </select>
+              </div>
+
+              <!-- From / To Unit Selection -->
+              <div class="grid grid-cols-2 gap-3">
+                <div class="flex flex-col gap-1.5">
+                  <label class="text-[10px] text-gray-400 font-bold uppercase tracking-wider">From Unit</label>
+                  <select id="conv-from" onchange="performWebConversion()" class="bg-[#030614] border border-brand-gold/20 rounded-xl px-3 py-2.5 text-xs text-white focus:outline-none focus:border-brand-gold font-mono">
+                    <!-- Loaded dynamically -->
+                  </select>
+                </div>
+                <div class="flex flex-col gap-1.5">
+                  <label class="text-[10px] text-gray-400 font-bold uppercase tracking-wider">To Unit</label>
+                  <select id="conv-to" onchange="performWebConversion()" class="bg-[#030614] border border-brand-gold/20 rounded-xl px-3 py-2.5 text-xs text-white focus:outline-none focus:border-brand-gold font-mono">
+                    <!-- Loaded dynamically -->
+                  </select>
+                </div>
+              </div>
+
+              <!-- Input Value -->
+              <div class="flex flex-col gap-1.5">
+                <label class="text-[10px] text-gray-400 font-bold uppercase tracking-wider">Enter Value</label>
+                <input type="number" id="conv-input" value="1" oninput="performWebConversion()" class="bg-[#030614] border border-brand-gold/20 rounded-xl px-4 py-2.5 text-sm text-white focus:outline-none focus:border-brand-gold font-mono">
+              </div>
+
+              <!-- Live Result Area -->
+              <div class="bg-[#030614] border border-brand-gold/15 p-4 rounded-xl flex flex-col gap-1 mt-1">
+                <span class="text-[9px] text-brand-gold font-bold uppercase tracking-wider">Converted Result</span>
+                <span id="conv-result" class="text-xl font-bold font-mono text-white">0.001 km</span>
+              </div>
+            </div>
+
+            <!-- PANE 3: GRAPHING -->
+            <div id="web-pane-graph" class="hidden p-5 flex flex-col gap-4 bg-brand-navy min-h-[350px]">
+              <span class="text-[10px] text-brand-gold font-bold uppercase tracking-wider block -mb-2">Formula Plotter</span>
+              
+              <!-- Input Formula Row -->
+              <div class="flex gap-2">
+                <input type="text" id="graph-formula-input" placeholder="e.g. sin(x) + x" class="flex-grow bg-[#030614] border border-brand-gold/20 rounded-xl px-3 py-2 text-xs text-white focus:outline-none focus:border-brand-gold font-mono">
+                <button onclick="addWebGraphEquation()" class="bg-brand-gold hover:opacity-90 text-brand-navy font-bold text-xs px-4 py-2.5 rounded-xl transition">Plot</button>
+              </div>
+
+              <!-- Canvas Plot Area -->
+              <div class="bg-[#030614] border border-brand-gold/20 rounded-xl overflow-hidden relative" style="height: 180px;">
+                <canvas id="graph-canvas" class="w-full h-full block"></canvas>
+                <!-- Canvas reset/zoom overlay controls -->
+                <div class="absolute right-2 bottom-2 flex flex-col gap-1.5">
+                  <button onclick="zoomWebGraph(1.2)" class="w-6 h-6 rounded bg-brand-navy/80 hover:bg-brand-royal text-white border border-brand-gold/10 text-xs font-bold flex items-center justify-center">+</button>
+                  <button onclick="zoomWebGraph(0.8)" class="w-6 h-6 rounded bg-brand-navy/80 hover:bg-brand-royal text-white border border-brand-gold/10 text-xs font-bold flex items-center justify-center">−</button>
+                </div>
+              </div>
+
+              <!-- Active Equations checkboxes list -->
+              <div class="flex flex-col gap-1.5">
+                <span class="text-[9px] text-gray-400 font-semibold uppercase">Active Equations</span>
+                <div id="graph-equations-list" class="flex flex-col gap-1 max-h-[60px] overflow-y-auto console-scrollbar">
+                  <!-- Loaded dynamically -->
+                </div>
+              </div>
+            </div>
+
           </div>
 
           <!-- Column 2: Educational Feature Highlight (7 Columns wide on desktop) -->
@@ -1005,111 +1114,678 @@ $ aws lambda update-function-code --function-name stripe-webhook-handler</p>
     }
 
     // ---------------------------------------------------------
-    // INTERACTIVE CALCULATOR ENGINE
+    // HIGH-ACCURACY MATHEMATICAL ENGINE (WebCalculatorEngine)
+    // ---------------------------------------------------------
+    class WebCalculatorEngine {
+      constructor(isDegreeMode = true) {
+        this.isDegreeMode = isDegreeMode;
+      }
+
+      evaluate(expression, xVal = null) {
+        let expr = expression.trim();
+        if (!expr) return 0;
+
+        // Replace visual operators
+        expr = expr
+          .replace(/÷/g, '/')
+          .replace(/×/g, '*')
+          .replace(/mod/g, '%')
+          .replace(/π/g, 'pi')
+          .replace(/e\^x/g, 'exp')
+          .replace(/e/g, 'e');
+
+        let pos = -1;
+        let ch = '';
+
+        const nextChar = () => {
+          pos++;
+          ch = pos < expr.length ? expr[pos] : '';
+        };
+
+        const eat = (charToEat) => {
+          while (ch === ' ') nextChar();
+          if (ch === charToEat) {
+            nextChar();
+            return true;
+          }
+          return false;
+        };
+
+        const parseExpression = () => {
+          let x = parseTerm();
+          for (;;) {
+            if (eat('+')) x += parseTerm();
+            else if (eat('-')) x -= parseTerm();
+            else return x;
+          }
+        };
+
+        const parseTerm = () => {
+          let x = parseFactor();
+          for (;;) {
+            if (eat('*')) x *= parseFactor();
+            else if (eat('/')) {
+              let div = parseFactor();
+              if (div === 0) throw new Error("Math Error");
+              x /= div;
+            } else if (eat('%')) {
+              let mod = parseFactor();
+              if (mod === 0) throw new Error("Math Error");
+              x %= mod;
+            } else {
+              // Implicit multiplication check
+              if (ch === '(' || (ch >= '0' && ch <= '9') || ch === '.' || (ch >= 'a' && ch <= 'z') || ch === '√' || ch === '∛' || ch === 'π' || ch === 'e') {
+                x *= parseFactor();
+              } else {
+                return x;
+              }
+            }
+          }
+        };
+
+        const factorial = (n) => {
+          if (n < 0 || Math.floor(n) !== n) throw new Error("Math Error");
+          if (n > 170) return Infinity;
+          let res = 1;
+          for (let i = 1; i <= n; i++) res *= i;
+          return res;
+        };
+
+        const parseFactor = () => {
+          if (eat('+')) return parseFactor();
+          if (eat('-')) return -parseFactor();
+
+          let x;
+          let startPos = pos;
+          if (eat('(')) {
+            x = parseExpression();
+            if (!eat(')')) throw new Error("Syntax Error");
+          } else if ((ch >= '0' && ch <= '9') || ch === '.') {
+            while ((ch >= '0' && ch <= '9') || ch === '.') nextChar();
+            if (ch === 'e' || ch === 'E') {
+              let nextCh = pos + 1 < expr.length ? expr[pos + 1] : '';
+              if ((nextCh >= '0' && nextCh <= '9') || nextCh === '+' || nextCh === '-') {
+                nextChar();
+                if (ch === '+' || ch === '-') nextChar();
+                while (ch >= '0' && ch <= '9') nextChar();
+              }
+            }
+            let numStr = expr.substring(startPos, pos);
+            x = parseFloat(numStr);
+            if (isNaN(x)) throw new Error("Syntax Error");
+          } else if ((ch >= 'a' && ch <= 'z') || (ch >= 'A' && ch <= 'Z') || ch === '√' || ch === '∛' || ch === 'π') {
+            let func = "";
+            if (ch === '√') {
+              func = "sqrt";
+              nextChar();
+            } else if (ch === '∛') {
+              func = "cbrt";
+              nextChar();
+            } else {
+              while ((ch >= 'a' && ch <= 'z') || (ch >= 'A' && ch <= 'Z')) {
+                func += ch;
+                nextChar();
+              }
+            }
+
+            if (func === "pi" || func === "π") {
+              x = Math.PI;
+            } else if (func === "e") {
+              x = Math.E;
+            } else if (func === "x") {
+              if (xVal !== null) {
+                x = xVal;
+              } else {
+                throw new Error("Syntax Error");
+              }
+            } else {
+              let hasParenthesis = eat('(');
+              let arg = parseExpression();
+              if (hasParenthesis && !eat(')')) throw new Error("Syntax Error");
+
+              switch (func) {
+                case "sin":
+                  x = this.isDegreeMode ? Math.sin(arg * Math.PI / 180) : Math.sin(arg);
+                  break;
+                case "cos":
+                  x = this.isDegreeMode ? Math.cos(arg * Math.PI / 180) : Math.cos(arg);
+                  break;
+                case "tan":
+                  let rad = this.isDegreeMode ? (arg * Math.PI / 180) : arg;
+                  if (Math.abs(Math.cos(rad)) < 1e-15) throw new Error("Math Error");
+                  x = Math.tan(rad);
+                  break;
+                case "asin":
+                  if (arg < -1 || arg > 1) throw new Error("Math Error");
+                  x = Math.asin(arg);
+                  if (this.isDegreeMode) x = x * 180 / Math.PI;
+                  break;
+                case "acos":
+                  if (arg < -1 || arg > 1) throw new Error("Math Error");
+                  x = Math.acos(arg);
+                  if (this.isDegreeMode) x = x * 180 / Math.PI;
+                  break;
+                case "atan":
+                  x = Math.atan(arg);
+                  if (this.isDegreeMode) x = x * 180 / Math.PI;
+                  break;
+                case "log":
+                  if (arg <= 0) throw new Error("Math Error");
+                  x = Math.log10(arg);
+                  break;
+                case "ln":
+                  if (arg <= 0) throw new Error("Math Error");
+                  x = Math.log(arg);
+                  break;
+                case "sqrt":
+                  if (arg < 0) throw new Error("Math Error");
+                  x = Math.sqrt(arg);
+                  break;
+                case "cbrt":
+                  x = Math.cbrt(arg);
+                  break;
+                case "abs":
+                  x = Math.abs(arg);
+                  break;
+                case "exp":
+                  x = Math.exp(arg);
+                  break;
+                default:
+                  throw new Error("Syntax Error");
+              }
+            }
+          } else {
+            throw new Error("Syntax Error");
+          }
+
+          if (eat('^')) {
+            let exponent = parseFactor();
+            if (x < 0 && Math.floor(exponent) !== exponent) throw new Error("Math Error");
+            x = Math.pow(x, exponent);
+          }
+
+          for (;;) {
+            if (eat('!')) {
+              x = factorial(x);
+            } else if (eat('%')) {
+              x /= 100;
+            } else {
+              break;
+            }
+          }
+
+          return x;
+        };
+
+        nextChar();
+        let result = parseExpression();
+        if (pos < expr.length) throw new Error("Syntax Error");
+        return result;
+      }
+    }
+
+    // ---------------------------------------------------------
+    // WEB CALCULATOR STATE & ACTIONS
     // ---------------------------------------------------------
     let calcExpression = "";
     let calcMemory = 0;
+    let isWebDegreeMode = true;
+    let isWebScientificOpen = false;
 
     function updateCalcScreen() {
-      document.getElementById('calc-input').innerText = calcExpression || " ";
+      let displayExpr = calcExpression || " ";
+      document.getElementById('calc-input').innerText = displayExpr;
     }
 
+    // This handles key inputs responsive and updates live previews!
     function calcInput(char) {
       calcExpression += char;
       updateCalcScreen();
-      logTelemetry(`[Engine] Input term registered: '${char}'`);
+      logTelemetry(`[Engine] Input registered: '${char}'`);
+      calculateRealtimeResult();
+    }
+
+    function calculateRealtimeResult() {
+      let trimmed = calcExpression.trim();
+      if (!trimmed) {
+        document.getElementById('calc-result').innerText = "0";
+        return;
+      }
+
+      let cleanExpr = trimmed;
+      while (cleanExpr.length > 0 && (
+        cleanExpr.endsWith("+") ||
+        cleanExpr.endsWith("-") ||
+        cleanExpr.endsWith("×") ||
+        cleanExpr.endsWith("÷") ||
+        cleanExpr.endsWith("%") ||
+        cleanExpr.endsWith("^") ||
+        cleanExpr.endsWith("(") ||
+        cleanExpr.endsWith("mod")
+      )) {
+        if (cleanExpr.endsWith("mod")) {
+          cleanExpr = cleanExpr.substring(0, cleanExpr.length - 3);
+        } else {
+          cleanExpr = cleanExpr.slice(0, -1);
+        }
+        cleanExpr = cleanExpr.trim();
+      }
+
+      if (!cleanExpr) return;
+
+      try {
+        const engine = new WebCalculatorEngine(isWebDegreeMode);
+        let evalResult = engine.evaluate(cleanExpr);
+        if (!isNaN(evalResult) && isFinite(evalResult)) {
+          document.getElementById('calc-result').innerText = formatDouble(evalResult);
+        }
+      } catch (e) {
+        // Safe drop of intermediate errors
+      }
+    }
+
+    function formatDouble(d) {
+      if (!isFinite(d)) return "Math Error";
+      if (isNaN(d)) return "Math Error";
+      if (d === 0) return "0";
+
+      let absVal = Math.abs(d);
+      if (absVal >= 1e12 || (absVal <= 1e-6 && absVal > 0)) {
+        return d.toExponential(6);
+      }
+
+      let formatted = d.toFixed(10);
+      let end = formatted.length - 1;
+      while (end > 0 && formatted[end] === '0') {
+        end--;
+      }
+      if (formatted[end] === '.') {
+        end--;
+      }
+      return formatted.substring(0, end + 1);
     }
 
     function calcClear() {
       calcExpression = "";
       updateCalcScreen();
       document.getElementById('calc-result').innerText = "0";
-      logTelemetry(`[Engine] Register cleared.`);
+      logTelemetry(`[Engine] Cleared calculator states.`);
     }
 
     function calcBackspace() {
-      calcExpression = calcExpression.slice(0, -1);
+      if (calcExpression.length > 0) {
+        calcExpression = calcExpression.slice(0, -1);
+      }
       updateCalcScreen();
-      logTelemetry(`[Engine] Single character deletion.`);
+      calculateRealtimeResult();
+      logTelemetry(`[Engine] Backspace clicked.`);
     }
 
     function calcFunction(funcName) {
       calcExpression += funcName + "(";
       updateCalcScreen();
-      logTelemetry(`[Engine] High-order functional invocation: ${funcName}`);
+      logTelemetry(`[Engine] Function appended: ${funcName}(`);
     }
 
-    // Evaluate mathematical expression safely matching PEMDAS
     function calcEvaluate() {
-      if (!calcExpression) return;
-      
-      logTelemetry(`[Engine] Parsing expression: ${calcExpression}`);
+      if (!calcExpression.trim()) return;
+      logTelemetry(`[Engine] Initiating high-accuracy calculation: "${calcExpression}"`);
 
       try {
-        // Sanitize & replace visual operators for standard JS eval or safe math
-        let sanitized = calcExpression
-          .replace(/÷/g, '/')
-          .replace(/×/g, '*')
-          .replace(/sin\(/g, 'Math.sin(')
-          .replace(/cos\(/g, 'Math.cos(')
-          .replace(/tan\(/g, 'Math.tan(')
-          .replace(/\^/g, '**');
-
-        // Handle single-value percentages if applicable, e.g., '10%' -> '0.1'
-        sanitized = sanitized.replace(/(\d+)%/g, '($1/100)');
-
-        // Evaluate using a safe sandbox calculation model
-        let result = Function(`"use strict"; return (${sanitized})`)();
-
-        // Round results cleanly to prevent 0.1+0.2 IEEE issue
-        if (typeof result === 'number') {
-          result = Math.round(result * 1000000000) / 1000000000;
+        const engine = new WebCalculatorEngine(isWebDegreeMode);
+        let evalResult = engine.evaluate(calcExpression);
+        if (isNaN(evalResult) || !isFinite(evalResult)) {
+          throw new Error("Math Error");
         }
-
-        if (isNaN(result) || !isFinite(result)) {
-          throw new Error("Arithmetic Range Error");
-        }
-
-        document.getElementById('calc-result').innerText = result;
-        logTelemetry(`[Engine] Success: result = ${result}`);
-        logTelemetry(`[Mixpanel] Event tracked: 'calculate_success'`);
+        let resultString = formatDouble(evalResult);
+        document.getElementById('calc-result').innerText = resultString;
+        
+        logTelemetry(`[Engine] Successfully resolved expression: result = ${resultString}`);
+        logTelemetry(`[Mixpanel] Tracked calculation event.`);
       } catch (err) {
         document.getElementById('calc-result').innerText = "Math Error";
-        logTelemetry(`[Sentry] Captured range exception: ${err.message}`);
+        logTelemetry(`[Sentry] Captured syntax/math exception during parsing.`);
       }
     }
 
-    // Memory operations
+    // DEG / RAD Toggles
+    function toggleWebDegRad() {
+      isWebDegreeMode = !isWebDegreeMode;
+      const btn = document.getElementById('calc-degrad-btn');
+      btn.innerText = isWebDegreeMode ? "DEG" : "RAD";
+      logTelemetry(`[Engine] Switched computational context mode to: ${isWebDegreeMode ? "DEGREES" : "RADIANS"}`);
+      calculateRealtimeResult();
+    }
+
+    // Scientific Panel Toggle
+    function toggleWebScientific() {
+      isWebScientificOpen = !isWebScientificOpen;
+      const panel = document.getElementById('calc-scientific-panel');
+      const btn = document.getElementById('calc-scitoggle-btn');
+      
+      if (isWebScientificOpen) {
+        panel.classList.remove('hidden');
+        btn.innerText = "Scientific: On";
+        btn.classList.add('text-brand-gold', 'border-brand-gold/50');
+      } else {
+        panel.classList.add('hidden');
+        btn.innerText = "Scientific: Off";
+        btn.classList.remove('text-brand-gold', 'border-brand-gold/50');
+      }
+      logTelemetry(`[UI] Toggled advanced scientific rows: open=${isWebScientificOpen}`);
+    }
+
+    // Result Clipboard Copy
+    function copyCalcResult() {
+      const resultVal = document.getElementById('calc-result').innerText;
+      navigator.clipboard.writeText(resultVal).then(() => {
+        logTelemetry(`[UI] Result copied to device clipboard: ${resultVal}`);
+        alert(`Copied "${resultVal}" to clipboard successfully.`);
+      }).catch(err => {
+        logTelemetry(`[UI] Error copying result to clipboard.`);
+      });
+    }
+
+    // Memory Registers
     function calcMemoryClear() {
       calcMemory = 0;
       document.getElementById('calc-mem-indicator').classList.add('opacity-0');
-      logTelemetry(`[Memory] Register cleared.`);
+      logTelemetry(`[Memory] Register MC cleared.`);
     }
 
     function calcMemoryRecall() {
-      calcExpression += calcMemory.toString();
+      calcExpression += formatDouble(calcMemory);
       updateCalcScreen();
-      logTelemetry(`[Memory] Recall: appended value ${calcMemory}`);
+      calculateRealtimeResult();
+      logTelemetry(`[Memory] Recalled value MR: added ${calcMemory}`);
     }
 
     function calcMemoryAdd() {
-      const currentValStr = document.getElementById('calc-result').innerText;
-      const parsed = parseFloat(currentValStr);
-      if (!isNaN(parsed)) {
-        calcMemory += parsed;
-        document.getElementById('calc-mem-indicator').classList.remove('opacity-0');
-        logTelemetry(`[Memory] Added ${parsed}. Total memory register = ${calcMemory}`);
-      }
+      const resVal = parseFloat(document.getElementById('calc-result').innerText) || 0;
+      calcMemory += resVal;
+      document.getElementById('calc-mem-indicator').classList.remove('opacity-0');
+      logTelemetry(`[Memory] M+ added ${resVal}. Accumulated: ${calcMemory}`);
     }
 
     function calcMemorySubtract() {
-      const currentValStr = document.getElementById('calc-result').innerText;
-      const parsed = parseFloat(currentValStr);
-      if (!isNaN(parsed)) {
-        calcMemory -= parsed;
-        document.getElementById('calc-mem-indicator').classList.remove('opacity-0');
-        logTelemetry(`[Memory] Subtracted ${parsed}. Total memory register = ${calcMemory}`);
+      const resVal = parseFloat(document.getElementById('calc-result').innerText) || 0;
+      calcMemory -= resVal;
+      document.getElementById('calc-mem-indicator').classList.remove('opacity-0');
+      logTelemetry(`[Memory] M- subtracted ${resVal}. Accumulated: ${calcMemory}`);
+    }
+
+    // ---------------------------------------------------------
+    // SUB-TAB SELECTION & INTERFACES (CALC / CONVERTER / GRAPHING)
+    // ---------------------------------------------------------
+    function switchWebTab(tab) {
+      document.getElementById('web-pane-calc').classList.add('hidden');
+      document.getElementById('web-pane-conv').classList.add('hidden');
+      document.getElementById('web-pane-graph').classList.add('hidden');
+
+      const deactivate = (id) => {
+        const btn = document.getElementById(id);
+        if (btn) btn.className = "flex-1 py-1.5 rounded-lg text-[10px] font-bold uppercase tracking-wider transition bg-brand-navy/60 border border-brand-gold/10 text-gray-300";
+      };
+      deactivate('web-tab-calc');
+      deactivate('web-tab-conv');
+      deactivate('web-tab-graph');
+
+      let activePaneId = "";
+      let activeBtnId = "";
+      if (tab === 'calc') {
+        activePaneId = 'web-pane-calc';
+        activeBtnId = 'web-tab-calc';
+      } else if (tab === 'conv') {
+        activePaneId = 'web-pane-conv';
+        activeBtnId = 'web-tab-conv';
+        updateConvType();
+      } else if (tab === 'graph') {
+        activePaneId = 'web-pane-graph';
+        activeBtnId = 'web-tab-graph';
+        setTimeout(() => {
+          renderEquationsList();
+          drawGraph();
+        }, 50);
       }
+
+      document.getElementById(activePaneId).classList.remove('hidden');
+      const activeBtn = document.getElementById(activeBtnId);
+      if (activeBtn) activeBtn.className = "flex-1 py-1.5 rounded-lg text-[10px] font-bold uppercase tracking-wider transition bg-brand-gold text-brand-navy";
+
+      logTelemetry(`[UI] Computational view container switched to: ${tab}`);
+    }
+
+    // ---------------------------------------------------------
+    // UNIT CONVERTER PANE LOGIC
+    // ---------------------------------------------------------
+    const lengthUnits = ["m", "km", "cm", "mm", "in", "ft"];
+    const weightUnits = ["kg", "g", "lbs", "oz"];
+    const tempUnits = ["°C", "°F", "K"];
+
+    function updateConvType() {
+      const type = document.getElementById('conv-type').value;
+      const fromSel = document.getElementById('conv-from');
+      const toSel = document.getElementById('conv-to');
+
+      fromSel.innerHTML = "";
+      toSel.innerHTML = "";
+
+      let units = [];
+      if (type === "Length") units = lengthUnits;
+      else if (type === "Weight") units = weightUnits;
+      else if (type === "Temperature") units = tempUnits;
+
+      units.forEach(unit => {
+        const optFrom = document.createElement('option');
+        optFrom.value = unit;
+        optFrom.innerText = unit;
+        fromSel.appendChild(optFrom);
+
+        const optTo = document.createElement('option');
+        optTo.value = unit;
+        optTo.innerText = unit;
+        toSel.appendChild(optTo);
+      });
+
+      if (type === "Length") {
+        fromSel.value = "m";
+        toSel.value = "km";
+      } else if (type === "Weight") {
+        fromSel.value = "kg";
+        toSel.value = "g";
+      } else if (type === "Temperature") {
+        fromSel.value = "°C";
+        toSel.value = "°F";
+      }
+
+      performWebConversion();
+    }
+
+    function performWebConversion() {
+      const type = document.getElementById('conv-type').value;
+      const fromUnit = document.getElementById('conv-from').value;
+      const toUnit = document.getElementById('conv-to').value;
+      const valInput = parseFloat(document.getElementById('conv-input').value) || 0;
+
+      let converted = valInput;
+
+      if (type === "Length") {
+        let meters = valInput;
+        if (fromUnit === "km") meters = valInput * 1000.0;
+        else if (fromUnit === "cm") meters = valInput / 100.0;
+        else if (fromUnit === "mm") meters = valInput / 1000.0;
+        else if (fromUnit === "in") meters = valInput * 0.0254;
+        else if (fromUnit === "ft") meters = valInput * 0.3048;
+
+        if (toUnit === "m") converted = meters;
+        else if (toUnit === "km") converted = meters / 1000.0;
+        else if (toUnit === "cm") converted = meters * 100.0;
+        else if (toUnit === "mm") converted = meters * 1000.0;
+        else if (toUnit === "in") converted = meters / 0.0254;
+        else if (toUnit === "ft") converted = meters / 0.3048;
+
+      } else if (type === "Weight") {
+        let grams = valInput;
+        if (fromUnit === "kg") grams = valInput * 1000.0;
+        else if (fromUnit === "lbs") grams = valInput * 453.59237;
+        else if (fromUnit === "oz") grams = valInput * 28.34952;
+
+        if (toUnit === "g") converted = grams;
+        else if (toUnit === "kg") converted = grams / 1000.0;
+        else if (toUnit === "lbs") converted = grams / 453.59237;
+        else if (toUnit === "oz") converted = grams / 28.34952;
+
+      } else if (type === "Temperature") {
+        if (fromUnit !== toUnit) {
+          let celsius = valInput;
+          if (fromUnit === "°F") celsius = (valInput - 32.0) * 5.0 / 9.0;
+          else if (fromUnit === "K") celsius = valInput - 273.15;
+
+          if (toUnit === "°C") converted = celsius;
+          else if (toUnit === "°F") converted = celsius * 9.0 / 5.0 + 32.0;
+          else if (toUnit === "K") converted = celsius + 273.15;
+        }
+      }
+
+      let formatted = converted;
+      if (typeof converted === 'number') {
+        formatted = Math.round(converted * 100000) / 100000;
+      }
+
+      document.getElementById('conv-result').innerText = `${formatted} ${toUnit}`;
+      logTelemetry(`[Converter] Live conversion: ${valInput} ${fromUnit} -> ${formatted} ${toUnit}`);
+    }
+
+    // ---------------------------------------------------------
+    // CANVAS 2D FORMULA GRAPHING ENGINE
+    // ---------------------------------------------------------
+    let graphZoom = 25;
+    let graphCenterX = 0;
+    let graphCenterY = 0;
+    let activeEquations = ["sin(x)", "x^2", "cos(x)"];
+
+    function drawGraph() {
+      const canvas = document.getElementById('graph-canvas');
+      if (!canvas) return;
+      const ctx = canvas.getContext('2d');
+      const width = canvas.width = canvas.clientWidth;
+      const height = canvas.height = canvas.clientHeight;
+
+      ctx.fillStyle = "#030614";
+      ctx.fillRect(0, 0, width, height);
+
+      ctx.strokeStyle = "rgba(214, 175, 55, 0.08)";
+      ctx.lineWidth = 1;
+
+      const cx = width / 2 + graphCenterX;
+      const cy = height / 2 + graphCenterY;
+
+      const step = graphZoom;
+      if (step > 4) {
+        for (let x = cx % step; x < width; x += step) {
+          ctx.beginPath();
+          ctx.moveTo(x, 0);
+          ctx.lineTo(x, height);
+          ctx.stroke();
+        }
+        for (let y = cy % step; y < height; y += step) {
+          ctx.beginPath();
+          ctx.moveTo(0, y);
+          ctx.lineTo(width, y);
+          ctx.stroke();
+        }
+      }
+
+      ctx.strokeStyle = "rgba(214, 175, 55, 0.25)";
+      ctx.lineWidth = 1.5;
+
+      ctx.beginPath();
+      ctx.moveTo(0, cy);
+      ctx.lineTo(width, cy);
+      ctx.stroke();
+
+      ctx.beginPath();
+      ctx.moveTo(cx, 0);
+      ctx.lineTo(cx, height);
+      ctx.stroke();
+
+      const colors = ["#D4AF37", "#3B82F6", "#10B981", "#EC4899"];
+      const engine = new WebCalculatorEngine(false); // Graphing always parses in Radians
+
+      activeEquations.forEach((eqn, idx) => {
+        ctx.strokeStyle = colors[idx % colors.length];
+        ctx.lineWidth = 2;
+        ctx.beginPath();
+
+        let first = true;
+        for (let px = 0; px < width; px++) {
+          const xVal = (px - cx) / graphZoom;
+          try {
+            let evalY = engine.evaluate(eqn, xVal);
+            if (!isNaN(evalY) && isFinite(evalY)) {
+              const py = cy - evalY * graphZoom;
+              if (first) {
+                ctx.moveTo(px, py);
+                first = false;
+              } else {
+                ctx.lineTo(px, py);
+              }
+            }
+          } catch (e) {
+            // Silent drop of rendering line segments
+          }
+        }
+        ctx.stroke();
+      });
+    }
+
+    function zoomWebGraph(factor) {
+      graphZoom = Math.min(250, Math.max(5, graphZoom * factor));
+      drawGraph();
+      logTelemetry(`[Graphing] Viewport zoom factor scaled to: ${graphZoom.toFixed(1)}`);
+    }
+
+    function addWebGraphEquation() {
+      const input = document.getElementById('graph-formula-input');
+      const val = input.value.trim();
+      if (val) {
+        if (!activeEquations.includes(val)) {
+          activeEquations.push(val);
+          renderEquationsList();
+          drawGraph();
+          logTelemetry(`[Graphing] Plotted new math function: y = ${val}`);
+        }
+        input.value = "";
+      }
+    }
+
+    function removeWebGraphEquation(eqn) {
+      activeEquations = activeEquations.filter(e => e !== eqn);
+      renderEquationsList();
+      drawGraph();
+      logTelemetry(`[Graphing] Deleted plotted equation: y = ${eqn}`);
+    }
+
+    function renderEquationsList() {
+      const container = document.getElementById('graph-equations-list');
+      if (!container) return;
+      container.innerHTML = "";
+
+      const colors = ["#D4AF37", "#3B82F6", "#10B981", "#EC4899"];
+
+      activeEquations.forEach((eqn, idx) => {
+        const itemColor = colors[idx % colors.length];
+        const el = document.createElement('div');
+        el.className = "flex items-center justify-between text-[11px] bg-[#020410] border border-brand-gold/10 px-2 py-1 rounded";
+        el.innerHTML = `
+          <div class="flex items-center gap-1.5">
+            <span class="w-2 rounded-full h-2" style="background-color: ${itemColor}"></span>
+            <span class="font-mono text-white">${eqn}</span>
+          </div>
+          <button onclick="removeWebGraphEquation('${eqn.replace(/'/g, "\\'")}')" class="text-red-400 hover:text-red-300 font-extrabold px-1 text-[10px]">×</button>
+        `;
+        container.appendChild(el);
+      });
     }
 
     // Mock Downloads
